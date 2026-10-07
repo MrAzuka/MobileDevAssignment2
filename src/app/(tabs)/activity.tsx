@@ -1,20 +1,19 @@
-import { useState } from 'react';
-import { ScrollView, SectionList, StyleSheet, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useState } from "react";
+import { ScrollView, SectionList, StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-import { CategoryChip } from '@/components/category-chip';
-import { SearchBar } from '@/components/search-bar';
-import { ThemedText } from '@/components/themed-text';
-import { TransactionRow } from '@/components/transaction-row';
-import { Spacing } from '@/constants/theme';
-import { useAppTheme } from '@/context/app-theme';
-import { ACTIVITY_FILTERS, TRANSACTIONS } from '@/data/activity';
-import type { Transaction, TransactionKind } from '@/types';
+import { CategoryChip } from "@/components/category-chip";
+import { SearchBar } from "@/components/search-bar";
+import { ThemedText } from "@/components/themed-text";
+import { TransactionRow } from "@/components/transaction-row";
+import { Spacing } from "@/constants/theme";
+import { useAppTheme } from "@/context/app-theme";
+import { ACTIVITY_FILTERS, TRANSACTIONS } from "@/data/activity";
+import type { Transaction, TransactionKind } from "@/types";
 
-type Filter = 'all' | TransactionKind;
+type Filter = "all" | TransactionKind;
 type Section = { title: string; data: Transaction[] };
 
-/** Groups consecutive transactions that share a date label (the data is newest first). */
 function groupByDate(transactions: Transaction[]): Section[] {
   const sections: Section[] = [];
   for (const transaction of transactions) {
@@ -30,19 +29,22 @@ function groupByDate(transactions: Transaction[]): Section[] {
 
 export default function ActivityScreen() {
   const { colors } = useAppTheme();
-  const [query, setQuery] = useState('');
-  const [filter, setFilter] = useState<Filter>('all');
+  const [query, setQuery] = useState("");
+  const [filter, setFilter] = useState<Filter>("all");
 
   const search = query.trim().toLowerCase();
   const visible = TRANSACTIONS.filter(
     (transaction) =>
-      (filter === 'all' || transaction.kind === filter) &&
+      (filter === "all" || transaction.kind === filter) &&
       (transaction.title.toLowerCase().includes(search) ||
         transaction.account.toLowerCase().includes(search)),
   );
 
   return (
-    <SafeAreaView style={[styles.screen, { backgroundColor: colors.background }]} edges={['top']}>
+    <SafeAreaView
+      style={[styles.screen, { backgroundColor: colors.background }]}
+      edges={["top"]}
+    >
       <SectionList
         sections={groupByDate(visible)}
         keyExtractor={(transaction) => transaction.id}
@@ -52,12 +54,17 @@ export default function ActivityScreen() {
         ListHeaderComponent={
           <View style={styles.header}>
             <ThemedText style={styles.title}>Activity</ThemedText>
-            <SearchBar placeholder="Search activity" value={query} onChangeText={setQuery} />
+            <SearchBar
+              placeholder="Search activity"
+              value={query}
+              onChangeText={setQuery}
+            />
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
               style={styles.filtersRow}
-              contentContainerStyle={styles.filters}>
+              contentContainerStyle={styles.filters}
+            >
               {ACTIVITY_FILTERS.map((option) => (
                 <CategoryChip
                   key={option.id}
@@ -106,12 +113,12 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.two,
   },
   title: {
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 18,
     fontWeight: 600,
     paddingVertical: Spacing.three,
   },
-  /** Bleeds to the screen edges so chips scroll off-screen, not off the padding. */
+
   filtersRow: {
     marginHorizontal: -Spacing.three,
   },
@@ -126,7 +133,7 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.one,
   },
   empty: {
-    textAlign: 'center',
+    textAlign: "center",
     marginTop: Spacing.five,
   },
 });

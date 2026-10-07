@@ -57,13 +57,6 @@ export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
 /** Either palette; read the active one with `useAppTheme()` from `@/context/app-theme`. */
 export type Palette = Record<ThemeColor, string>;
 
-/** The promo banner artwork is dark in both themes, so its colours do not switch. */
-export const PromoColors = {
-  text: '#ffffff',
-  buttonLabel: '#000000',
-  gradient:['#0B0B0B', '#16123A', '#4A3BD1'],
-  art: 'rgba(255, 255, 255, 0.35)',
-} as const;
 
 export const Radius = {
   sm: 8,
