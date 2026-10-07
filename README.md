@@ -2,6 +2,25 @@
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
+## Reference screenshots
+
+The app's UI is modelled on these screens from the Wealthsimple app.
+
+<table>
+  <tr>
+    <th>Home</th>
+    <th>Search</th>
+    <th>Move</th>
+    <th>Activity</th>
+  </tr>
+  <tr>
+    <td><img src="docs/reference/home.jpg" alt="Wealthsimple Home screen" width="250"></td>
+    <td><img src="docs/reference/search.jpg" alt="Wealthsimple Search screen" width="250"></td>
+    <td><img src="docs/reference/move.jpg" alt="Wealthsimple Move screen" width="250"></td>
+    <td><img src="docs/reference/activity.jpeg" alt="Wealthsimple Activity screen" width="250"></td>
+  </tr>
+</table>
+
 ## Get started
 
 1. Install dependencies
